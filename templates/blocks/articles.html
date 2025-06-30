@@ -1,0 +1,52 @@
+<script>
+    $(document).ready(function () {
+        $("#articles-slider").owlCarousel({
+            items: 4,
+            margin: 15,
+            autoWidth: true,
+            //itemsDesktop: [1199, 3],
+            //itemsDesktopSmall: [1000, 2],
+            //itemsMobile: [650, 1],
+            pagination: true,
+            navigationText: false,
+            autoPlay: true,
+            mouseDrag: true,
+            touchDrag: true,
+            nav: true,
+            rewind: true
+        });
+    });
+
+    function test() {
+
+    };
+</script>
+
+<section class="articles">
+    <div class="container pt-5 pb-5">
+        <div class="row mb-4">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <h3 class="mb-4" onclick="WArticle.showArticle(event, '/@ustu_official-arhitektora');">Узнайте больше о направлениях вуза</h3>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div id="articles-slider" class="owl-carousel owl-theme">
+                    <div style="width: 400px; display: none">
+                        <div id="vk_article_-174918845_94569"></div>
+                    </div>
+                    {% comment %}<div style="width: 400px">
+                        <div id="vk_article_-174918845_94038"></div>
+                    </div>
+                    <div style="width: 400px">
+                        <div id="vk_article_-174918845_94995"></div>
+                    </div>
+                    <div style="width: 400px">
+                        <div id="vk_article_-174918845_94877"></div>
+                    </div>{% endcomment %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

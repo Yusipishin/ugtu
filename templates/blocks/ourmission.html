@@ -1,0 +1,54 @@
+{% load staticfiles %}
+<script>
+    $(document).ready(
+        function () {
+            $(window).stellar({
+                horizontalScrolling: false,
+            });
+
+            $(function () {
+                $('[data-toggle="popover"]').popover()
+            })
+        }
+    );
+</script>
+
+<div class="institutes" id="ourmission" data-stellar-background-ratio="0.5">
+    <a name="institutes"></a>
+    <div class="container pt-5">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-7 col-xl-7 d-flex flex-column justify-content-start">
+                <div>
+                    <h1 class="mb-4 pk-color-blue">Наша миссия</h1>
+                    <h5 class="our-mission-padding">Основной миссией УГТУ является обеспечение кадров для ведущих
+                        предприятий региона и&nbsp;страны. Наш университет работает в&nbsp;мощном тандеме с&nbsp;такими
+                        крупными предприятиями как «Лукойл», «Газпром» и&nbsp;«Транснефть».</h5>
+                </div>
+
+                <div class="mt-auto pb-5 d-flex flex-row justify-content-around align-items-start flex-wrap">
+                    <a class="mb-3" href="http://www.gazprom.ru/" target="_blank">
+                        <img src="{% static 'img/logos/gazprom.png' %}">
+                    </a>
+                    <a class="mb-3" href="http://lukoil.ru/" target="_blank">
+                        <img src="{% static 'img/logos/lukoil.png' %}">
+                    </a>
+                    <a class="mb-3" href="http://www.rosneft.ru/" target="_blank">
+                        <img src="{% static 'img/logos/rosneft.png' %}">
+                    </a>
+                    <a class="ml-2 mb-3" href="http://www.transneft.ru/" target="_blank">
+                        <img src="{% static 'img/logos/transneft.png' %}">
+                    </a>
+                    <a class="mb-3" href="http://www.zarubezhneft.ru/" target="_blank">
+                        <img src="{% static 'img/logos/zarubezhneft.png' %}">
+                    </a>
+                    <a class="mb-3" href="http://www.burgaz.ru/" target="_blank">
+                        <img src="{% static 'img/logos/gazprom_burenie.png' %}">
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-5 col-xl-5">
+                <div class="man w-100 h-100"></div>
+            </div>
+        </div>
+    </div>
+</div>

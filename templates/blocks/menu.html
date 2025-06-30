@@ -1,0 +1,43 @@
+{% load staticfiles %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light p-3" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">
+            <img src="{% static 'img/ugtu.svg' %}" width="80" height="80" alt="">
+        </a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation">
+            Меню
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <div class="ml-auto d-flex flex-column justify-content-end">
+                <ul class="navbar-nav text-uppercase font-weight-bold ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#about">О вузе</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#ourmission">Наша миссия</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#napr">Направления</a>
+                    </li>
+                    {% comment %}<li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="{% url 'url_apply_form' %}" target="_blank">Подать документы</a>
+                    </li>{% endcomment %}
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#contacts">Контакты</a>
+                    </li>
+                </ul>
+
+                <div class="ml-auto mt-1 pr-2">
+                    {% comment %}<small><a class="text-secondary" href="https://vk.com/prof_ugtu" target="_blank"><i class="fab fa-vk text-black-50"></i> Профориентатор</a></small>{% endcomment %}
+                    {% comment %}<small><a class="text-secondary ml-2" href="https://www.instagram.com/prof_ugtu" target="_blank"><i class="fab fa-instagram text-black-50"></i> Профориентатор</a></small>{% endcomment %}
+                    <small><a class="text-secondary ml-2" href="https://vk.com/prof_ugtu" target="_blank"><i class="fab fa-vk text-black-50"></i> Приёмная комиссия УГТУ</a></small>
+                    <small><a class="text-secondary ml-2" href="https://vk.com/ustu_official" target="_blank"><i class="fab fa-vk text-black-50"></i> Новости УГТУ</a></small>
+                    {% comment %}<small><a class="text-secondary ml-2" href="https://pk.ugtu.net/" target="_blank"><i class="fas fa-external-link-alt text-black-50"></i> Сайт приёмной комиссии</a></small>{% endcomment %}
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>

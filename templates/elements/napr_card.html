@@ -1,0 +1,44 @@
+{% load staticfiles %}
+<div class="card bg-dark text-white border-0 rounded-0 mb-3 napr_card"
+     style="background-image: url({% static img %});">
+
+    <div class="card-img-overlay d-flex flex-column justify-content-between common_info">
+        <h5 class="card-title">{{ napr_name }}</h5>
+        <small style="letter-spacing: 3px" class="card-text text-uppercase text-white-50 spec_type">
+            {{ spec_type }}
+        </small>
+    </div>
+
+    <div class="card-img-overlay hidden_info d-flex justify-content-start align-items-end">
+
+        <div class="d-flex flex-column justify-content-start">
+            {% if och %}
+                <div class="d-flex flex-column justify-content-start">
+                    <small class="text-uppercase font-weight-bold text-white-50">Очно</small>
+                    <small>{{ och }}</small>
+                </div>
+            {% endif %}
+            {% if budget %}
+                <div class="d-flex flex-column justify-content-start mt-2">
+                    <small class="text-uppercase font-weight-bold text-white-50">Бюджет</small>
+                    <small>{{ budget }}</small>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="d-flex flex-column justify-content-start ml-4">
+            {% if zaoch %}
+                <div class="d-flex flex-column justify-content-start">
+                    <small class="text-uppercase font-weight-bold text-white-50">Заочно</small>
+                    <small>{{ zaoch }}</small>
+                </div>
+            {% endif %}
+            {% if dogovor %}
+                <div class="d-flex flex-column justify-content-start mt-2">
+                    <small class="text-uppercase font-weight-bold text-white-50">Договор</small>
+                    <small>{{ dogovor }}</small>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

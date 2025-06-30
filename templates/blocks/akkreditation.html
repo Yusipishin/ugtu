@@ -1,0 +1,81 @@
+{% load staticfiles %}
+<script>
+    $(document).ready(function () {
+        $("#docs-slider").owlCarousel({
+            items: 3,
+            margin: 15,
+            autoWidth: true,
+            //itemsDesktop: [1199, 3],
+            //itemsDesktopSmall: [1000, 2],
+            //itemsMobile: [650, 1],
+            pagination: false,
+            navigationText: false,
+            autoPlay: true
+        });
+
+        $('[data-fancybox="docs"]').fancybox({
+            toolbar: false
+        });
+
+        /*function collision($div1, $div2) {
+            var x1 = $div1.offset().left;
+            var y1 = $div1.offset().top;
+            var h1 = $div1.outerHeight(true);
+            var w1 = $div1.outerWidth(true);
+            var b1 = y1 + h1;
+            var r1 = x1 + w1;
+            var x2 = $div2.offset().left;
+            var y2 = $div2.offset().top;
+            var h2 = $div2.outerHeight(true);
+            var w2 = $div2.outerWidth(true);
+            var b2 = y2 + h2;
+            var r2 = x2 + w2;
+
+            if (b1 < y2 || y1 > b2 || r1 < x2 || x1 > r2) return false;
+            return true;
+        };
+
+        window.setInterval(function () {
+            console.log(collision($('#mainform'), $('.scrollToTop')));
+        }, 200);*/
+    });
+</script>
+
+<section class="akkred">
+    <div class="container pt-5 pb-5">
+        <div class="row mb-4">
+            <!--<div class="col-12 col-sm-12 col-md-12 col-lg-7 col-xl-7 d-flex flex-column justify-content-start">-->
+            <div class="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-5">
+                <h1 class="mb-4">Государственная аккредитация</h1>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-7 col-xl-7">
+                <p>Наличие лицензии на&nbsp;осуществление образовательной деятельности и&nbsp;свидетельства о&nbsp;государственной
+                    аккредитации&nbsp;— это <span class="font-weight-bold">гарантия качества образования в&nbsp;выбранном вами вузе</span>.
+                    В&nbsp;2020 году
+                    УГТУ прошёл государственную аккредитацию по&nbsp;всем заявленным образовательным программам.</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div id="docs-slider" class="owl-carousel">
+                    <div style="width: 300px">
+                        <a data-fancybox="docs" href="{% static 'img/akkred/lic_page1.jpg' %}">
+                            <img src="{% static 'img/akkred/lic_page1.jpg' %}">
+                        </a>
+                    </div>
+                    <div style="width: 300px">
+                        <a data-fancybox="docs" href="{% static 'img/akkred/lic_page2.jpg' %}">
+                            <img src="{% static 'img/akkred/lic_page2.jpg' %}">
+                        </a>
+                    </div>
+                    <div style="width: 300px">
+                        <a data-fancybox="docs" href="{% static 'img/akkred/svid_gosakkred.jpg' %}">
+                            <img src="{% static 'img/akkred/svid_gosakkred.jpg' %}">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

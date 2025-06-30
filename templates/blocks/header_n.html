@@ -1,0 +1,43 @@
+<script>
+    /*$('a[href*=\\#]').on('click', function (event) {
+        event.preventDefault();
+        $('html,body').animate({scrollTop: $(this.hash).offset().top}, 500);
+    });*/
+
+    $('.js-scroll-trigger').on('click', function (event) {
+        event.preventDefault();
+        $('html,body').animate({scrollTop: $(this.hash).offset().top}, 500);
+    });
+
+    // Y axis scroll speed
+    /*var velocity = 0.1;
+
+    function update() {
+        var pos = $(window).scrollTop();
+
+        $('.masthead').each(function () {
+            var $element = $(this);
+            // subtract some from the height b/c of the padding
+            //var height = $element.height();
+            var height = 0;
+
+            console.log('pos: ' + pos + ' height: ' + height + ' Math.round((height - pos) * velocity): ' + Math.round((height - pos) * velocity));
+            $(this).css('backgroundPosition', '50% ' + Math.round((height - pos) * velocity) + 'px');
+        });
+    };
+
+    $(window).bind('scroll', update);*/
+</script>
+
+<header class="masthead">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-7 col-lg-7 col-xl-6 intro-text">
+                <h5 class="mb-4" style="color: rgba(255, 255, 255, 0.8)!important;">Добро пожаловать на сайт<br> Приёмной комиссии УГТУ!</h5>
+                <h1>Северный форпост российского нефтегазового образования ждёт вас!</h1>
+                <a class="btn btn-primary-red btn-lg mt-4 js-scroll-trigger rounded-0 border-0" href="/apply" target="_blank">Подать
+                    документы</a>
+            </div>
+        </div>
+    </div>
+</header>

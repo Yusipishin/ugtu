@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block extra_head %}
+    {% include 'blocks/metrics.html' %}
+{% endblock %}
+
+{% block body %}
+    {% block menu %}
+        {% include 'blocks/menu.html' %}
+    {% endblock %}
+    {% block header %}
+        {% include 'blocks/header_n.html' %}
+    {% endblock %}
+    {% include 'blocks/napr.html' %}
+        {% comment %}{% include 'blocks/institutes.html' %}{% endcomment %}
+    {% include 'blocks/ourmission.html' %}
+    {% include 'blocks/about.html' %}
+        {% comment %}{% include 'blocks/articles.html' %}{% endcomment %}
+        {% comment %}{% include 'blocks/akkreditation.html' %}{% endcomment %}
+    {% include 'blocks/mainform.html' %}
+    {% include 'blocks/map.html' %}
+    {% include 'blocks/footer.html' %}
+
+    <div class="scrollToTop">
+        <i class="fa fa-angle-up"></i>
+    </div>
+{% endblock %}
+
+{% block modals %}
+    {% include 'blocks/modals.html' %}
+{% endblock %}

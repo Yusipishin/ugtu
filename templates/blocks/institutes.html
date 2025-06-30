@@ -1,0 +1,50 @@
+{% load staticfiles %}
+<div class="institutes">
+    <a name="institutes"></a>
+    <div class="container pt-5 pb-5">
+        <div class="mb-5">
+            <h1>Институты</h1>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card bg-dark text-white border-0 rounded-0 mb-3" style="height: 500px; background-image: url({% static 'img/institutes/igntt.jpeg' %}); background-position: center center; background-size: cover;">
+                    <div class="card-img-overlay d-flex flex-column justify-content-center" style="background-color: #000000ba;">
+                        <h5 class="card-title">Институт геологии, нефтегазодобычи и трубопроводного транспорта</h5>
+                        <p class="card-text">(ИГНиТТ)</p>
+                        <a href="#" class="stretched-link" data-toggle="modal" data-target=".about-igntt-modal"></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card bg-dark text-white border-0 rounded-0" style="height: 500px; background-image: url({% static 'img/institutes/sti.jpg' %}); background-position: center center; background-size: cover;">
+                    <div class="card-img-overlay d-flex flex-column justify-content-center" style="background-color: #000000ba;">
+                        <h5 class="card-title">Строительно-технологический институт</h5>
+                        <p class="card-text">(СТИ)</p>
+                        <a href="#" class="stretched-link" data-toggle="modal" data-target=".about-sti-modal"></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card bg-dark text-white border-0 rounded-0" style="height: 500px; background-image: url({% static 'img/institutes/ineuiit.jpg' %}); background-position: center center; background-size: cover;">
+                    <div class="card-img-overlay d-flex flex-column justify-content-center" style="background-color: #000000ba;">
+                        <h5 class="card-title">Институт экономики, управления и информационных технологий</h5>
+                        <p class="card-text">(ИнЭУиИТ)</p>
+                        <a href="#" class="stretched-link" data-toggle="modal" data-target=".about-ineuiit-modal"></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card bg-dark text-white border-0 rounded-0" style="height: 500px; background-image: url({% static 'img/ugtu.jpg' %}); background-position: center center; background-size: cover;">
+                    <div class="card-img-overlay d-flex flex-column justify-content-center" style="background-color: #000000ba;">
+                        <h5 class="card-title">Индустриальный институт</h5>
+                        <p class="card-text">(СПО)</p>
+                        <a href="#" class="stretched-link" data-toggle="modal" data-target=".about-iispo-modal"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

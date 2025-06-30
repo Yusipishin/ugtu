@@ -1,0 +1,135 @@
+{% load staticfiles %}
+<div class="form_bg"  id="mainform">
+    <script>
+        /*const element = document.querySelector('#main-form');
+        element.addEventListener('submit', event => {
+            event.preventDefault();
+            // actual logic, e.g. validate the form
+            console.log('Form submission cancelled.');
+        });*/
+
+        $(document).ready(
+            function () {
+                //$('#tel2').hide()
+            }
+        );
+
+        function send_main_form(e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            $('#submit-btn').prop('disabled', true);
+
+            var tel2 = $('#tel2i').val();
+            if (tel2) return false;
+
+            var name = $('#name').val();
+            var surname = $('#surname').val();
+            var middlename = $('#middlename').val();
+            var tel = $('#tel').val();
+            var time = $('#time').val();
+
+            $.ajax({
+                type: "POST",
+                url: '{% url "url_send_main_form" %}',
+                dataType: 'json',
+                data: {
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                    'name': name,
+                    'surname': surname,
+                    'middlename': middlename,
+                    'tel': tel,
+                    'time': time
+                },
+                success: function (data) {
+                    $('#main-form').trigger('reset');
+
+                    $('#modal_main_form_success').modal({
+                        keyboard: false
+                    });
+                    //alert(data.message);
+
+                    return false;
+                    /*
+                    Вызвать окно, типа всё заебок
+
+                    var dataNew = {
+                        id: data.id,
+                        text: position
+                    };
+                    var newOption = new Option(dataNew.text, dataNew.id, false, false);
+                    var poss = $('#id_position');
+                    var ids = poss.val();
+                    ids.push(data.id);
+                    poss.append(newOption).val(ids).trigger('change');
+                    dial_add.destroy()*/
+                }
+            });
+
+            return false;
+        }
+    </script>
+
+    <div class="container pt-5 pb-5 text-white">
+        <div class="mb-5">
+            <h1>Ваш первый шаг к поступлению в 2022 году!</h1>
+            {% comment %}<p class="font-weight-bold" style="color: rgba(255,255,255,.6)!important;">Заполните, пожалуйста, форму
+                заявки, и сотрудник Приемной комиссии свяжется с Вами в указанное время для уточнения необходимых
+                деталей.</p>{% endcomment %}
+            <p class="font-weight-bold" style="color: rgba(255,255,255,.6)!important;">Если у вас есть вопросы к приёмной комиссии - оставьте свои данные и мы вам перезвоним.</p>
+        </div>
+        <form class="row" id="main-form" method="post" data-toggle="ajax" enctype="multipart/form-data"
+              onsubmit="return send_main_form(event)">
+            {% csrf_token %}
+
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                <div class="form-group">
+                    <label for="exampleInputEmail1" class="text-white-50">Фамилия: *</label>
+                    <input id="surname" type="text" class="form-control rounded-0 border-0" required>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1" class="text-white-50">Имя: *</label>
+                    <input id="name" type="text" class="form-control rounded-0 border-0" required>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1" class="text-white-50">Отчество:</label>
+                    <input id="middlename" type="text" class="form-control rounded-0 border-0">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1" class="text-white-50">Номер телефона: *</label>
+                    <input id="tel" type="tel" class="form-control rounded-0 border-0" required>
+                </div>
+
+                <div class="form-group" style="display: none" id="tel2">
+                    <label for="exampleInputPassword1" class="text-white-50">Номер телефона: *</label>
+                    <input id="tel2i" type="tel" class="form-control rounded-0 border-0">
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 d-flex justify-content-start flex-column">
+                <div class="form-group">
+                    <label for="inputState" class="text-white-50">Удобное время для звонка: *</label>
+                    <select id="time" class="form-control rounded-0 border-0 mb-5" required>
+                        <option selected>9:00-11:00</option>
+                        <option>11:00-13:00</option>
+                        <option>13:00-15:00</option>
+                        <option>15:00-17:00</option>
+                    </select>
+                </div>
+
+                <div class="mt-auto pb-3 d-flex justify-content-start flex-column">
+                    <div class="custom-control custom-checkbox mb-3">
+                        <input type="checkbox" class="custom-control-input" id="customCheck1" required>
+                        <label class="custom-control-label" for="customCheck1"
+                               style="color: rgba(255,255,255,.6)!important;">
+                            В&nbsp;соответствии с&nbsp;Федеральным законом от&nbsp;27&nbsp;июля 2006&nbsp;г. №&nbsp;152-ФЗ
+                            «О&nbsp;персональных данных», я&nbsp;даю свое согласие на&nbsp;обработку моих персональных
+                            данных.</label>
+                    </div>
+
+                    <button id="submit-btn" class="btn btn-outline-light rounded-0 ml-auto" style="cursor: none">Отправить
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

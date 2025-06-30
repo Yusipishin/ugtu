@@ -1,0 +1,192 @@
+{% load staticfiles %}
+<script>
+    function validateFile() {
+        const allowedExtensions = ['pdf', 'jpg', 'jpeg'],
+            sizeLimit = 20000000; // 20MB
+        let incorrectFileSizes = [];
+        let incorrectFileTypes = [];
+
+        console.log(this.files.length);
+        console.log(this.files);
+
+        for (let i = 0; i <= this.files.length - 1; i++) {
+            let {name: fileName, size: fileSize} = this.files[i];
+            let fileExtension = fileName.split(".").pop();
+
+            if (!allowedExtensions.includes(fileExtension)) {
+                incorrectFileTypes.push(`.${fileExtension}`);
+            } else if (fileSize > sizeLimit) {
+                incorrectFileSizes.push(`.${fileSize}`);
+            }
+        }
+
+        if (incorrectFileTypes.length !== 0) {
+            alert(`Типы файлов ${incorrectFileTypes} не разрешёны к загрузке, выберете файлы с допустимым расширением.`);
+            this.value = null;
+        } else if (incorrectFileSizes.length !== 0) {
+            alert(`Вы выбрали один или несколько файлов, превышающих лимит в 20Мб.`);
+            this.value = null;
+        }
+    }
+
+    $(document).ready(function () {
+        const inputs = [$("#pd"), $("#zayava"), $("#zachisl"), $("#passport"), $("#docobrazov"), $("#snils"), $("#other")];
+
+        inputs.forEach(input => {
+            input.click(function () {
+                $(this).val("");
+            });
+
+            input.change(validateFile);
+        });
+
+        $.fn.setCursorPosition = function (pos) {
+            if ($(this).get(0).setSelectionRange) {
+                $(this).get(0).setSelectionRange(pos, pos);
+            } else if ($(this).get(0).createTextRange) {
+                var range = $(this).get(0).createTextRange();
+                range.collapse(true);
+                range.moveEnd('character', pos);
+                range.moveStart('character', pos);
+                range.select();
+            }
+        };
+
+        $("#phone").click(function () {
+            $(this).setCursorPosition(4);
+        }).mask("+7 (999) 999-99-99");
+    });
+
+</script>
+
+<div class="container pt-5 pb-4">
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6">
+            <h1 class="mb-5">Подать документы в УГТУ</h1>
+            {% comment %}<div class="blanks">
+                <h4>Бланки заявлений</h4>
+                <p><a href="{% static 'docs/zayavlenie.pdf' %}" download>Заявление</a></p>
+                <p><a href="{% static 'docs/zayavlenie_o_soglasii_na_zachislenie_vo.pdf' %}" download>Заявление о
+                    согласии на зачисление</a></p>
+                <p><a href="{% static 'docs/soglasie_na_obrabotku_pdn_abiturient_1.pdf' %}" download>Согласие на
+                    обработку персональных данных</a></p>
+                <p><a href="{% static 'docs/soglasie_na_rasprostranenie_pdn_abiturient_2.pdf' %}" download>Согласие на
+                    распространение персональных данных</a></p>
+                <p><a href="{% static 'docs/soglasie_na_peredachu_pdn_tretemu_licu_cropped2.pdf' %}" download>Согласие на
+                    передачу информации на ЕПГУ</a></p>
+            </div>{% endcomment %}
+            <form method="post" id="apply-form" enctype="multipart/form-data"
+                  onsubmit="formSubmit.innerHTML = 'Идёт загрузка файлов, ожидайте...'; formSubmit.disabled = true; return true;">
+                {% csrf_token %}
+                <div class="mb-4">
+                    <label for="exampleInputEmail1" class="form-label"><strong>ФИО<span
+                            class="text-danger ml-1">*</span></strong></label>
+                    <input type="text" class="form-control" id="fio" name="fio" required>
+                </div>
+
+                <div class="mb-4">
+                    <label for="exampleInputEmail1" class="form-label"><strong>Телефон<span
+                            class="text-danger ml-1">*</span></strong></label>
+                    <input type="text" class="form-control" id="phone" name="phone" required>
+                </div>
+
+                <div class="mb-4">
+                    <label for="exampleInputEmail1" class="form-label"><strong>Электронная почта<span
+                            class="text-danger ml-1">*</span></strong></label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+
+                <div class="mb-4">
+                    <label for="formFileMultiple" class="form-label"><strong>Заявление о согласии на обработку
+                        персональных данных<span class="text-danger ml-1">*</span></strong></label>
+                    <input class="form-control-file" type="file" id="pd" name="pd" aria-describedby="pdHelp" multiple
+                           required accept=".pdf, .jpg, .jpeg">
+                    <small id="pdHelp" class="form-text text-muted">Вы можете выбрать несколько файлов.<br>
+                        Разрешённые к загрузке файлы — <span class="text-danger">.pdf, .jpg, .jpeg</span></small>
+                </div>
+
+                <div class="mb-4">
+                    <label for="formFileMultiple" class="form-label"><strong>Заявление о согласии на распространение
+                        персональных данных<span class="text-danger ml-1">*</span></strong></label>
+                    <input class="form-control-file" type="file" id="distributepd" name="distributepd"
+                           aria-describedby="pdHelp" multiple
+                           required accept=".pdf, .jpg, .jpeg">
+                    <small id="pdHelp" class="form-text text-muted">Вы можете выбрать несколько файлов.<br>
+                        Разрешённые к загрузке файлы — <span class="text-danger">.pdf, .jpg, .jpeg</span></small>
+                </div>
+
+                <div class="mb-4">
+                    <label for="formFileMultiple" class="form-label"><strong>Заявление о согласии на передачу информации на единый портал государственных услуг</strong></label>
+                    <input class="form-control-file" type="file" id="epgu" name="epgu"
+                           aria-describedby="pdHelp" multiple accept=".pdf, .jpg, .jpeg">
+                    <small id="pdHelp" class="form-text text-muted"><strong>Необязательно. Только для поступающих на бакалавриат/специалитет</strong>
+                        <br/> Вы можете выбрать несколько файлов.<br>
+                        Разрешённые к загрузке файлы — <span class="text-danger">.pdf, .jpg, .jpeg</span></small>
+                </div>
+
+                <div class="mb-4">
+                    <label for="formFileMultiple" class="form-label"><strong>Заявление о согласии на зачисление</strong></label>
+                    <input class="form-control-file" type="file" id="zachisl" name="zachisl"
+                           aria-describedby="zachislHelp" multiple accept=".pdf, .jpg, .jpeg">
+                    <small id="zachislHelp" class="form-text text-muted">Вы можете выбрать несколько файлов.<br>
+                        Разрешённые к загрузке файлы — <span class="text-danger">.pdf, .jpg, .jpeg</span></small>
+                </div>
+
+                <div class="mb-4">
+                    <label for="formFileMultiple" class="form-label"><strong>Заявление<span
+                            class="text-danger ml-1">*</span></strong></label>
+                    <input class="form-control-file" type="file" id="zayava" name="zayava" aria-describedby="zayavaHelp"
+                           multiple required accept=".pdf, .jpg, .jpeg">
+                    <small id="zayavaHelp" class="form-text text-muted">Вы можете выбрать несколько файлов.<br>
+                        Разрешённые к загрузке файлы — <span class="text-danger">.pdf, .jpg, .jpeg</span></small>
+                </div>
+
+                <div class="mb-4">
+                    <label for="formFileMultiple" class="form-label"><strong>Паспорт<span
+                            class="text-danger ml-1">*</span></strong></label>
+                    <input class="form-control-file" type="file" id="passport" name="passport"
+                           aria-describedby="passportHelp" multiple required accept=".pdf, .jpg, .jpeg">
+                    <small id="passportHelp" class="form-text text-muted">Разворот с персональными данными, мето
+                        жительства (прописка).<br>
+                        Вы можете выбрать несколько файлов.<br>
+                        Разрешённые к загрузке файлы — <span class="text-danger">.pdf, .jpg, .jpeg</span>
+                    </small>
+                </div>
+
+                <div class="mb-4">
+                    <label for="formFileMultiple" class="form-label"><strong>Документ об образовании<span
+                            class="text-danger ml-1">*</span></strong></label>
+                    <input class="form-control-file" type="file" id="docobrazov" name="docobrazov"
+                           aria-describedby="docobrazovHelp" multiple required accept=".pdf, .jpg, .jpeg">
+                    <small id="docobrazovHelp" class="form-text text-muted">Разворот аттестата/диплома, приложения (с
+                        двух
+                        сторон).<br>
+                        Вы можете выбрать несколько файлов.<br>
+                        Разрешённые к загрузке файлы — <span class="text-danger">.pdf, .jpg, .jpeg</span>
+                    </small>
+                </div>
+
+                <div class="mb-4">
+                    <label for="formFileMultiple" class="form-label"><strong>СНИЛС<span
+                            class="text-danger ml-1">*</span></strong></label>
+                    <input class="form-control-file" type="file" id="snils" name="snils" aria-describedby="snilsHelp"
+                           multiple required accept=".pdf, .jpg, .jpeg">
+                    <small id="snilsHelp" class="form-text text-muted">Вы можете выбрать несколько файлов.<br>
+                        Разрешённые к загрузке файлы — <span class="text-danger">.pdf, .jpg, .jpeg</span></small>
+                </div>
+
+                <div class="mb-4">
+                    <label for="formFileMultiple" class="form-label"><strong>Иные документы</strong></label>
+                    <input class="form-control-file" type="file" id="other" name="other" aria-describedby="otherHelp"
+                           multiple accept=".pdf, .jpg, .jpeg">
+                    <small id="otherHelp" class="form-text text-muted">Вы можете выбрать несколько файлов.<br>
+                        Разрешённые к загрузке файлы — <span class="text-danger">.pdf, .jpg, .jpeg</span></small>
+                </div>
+                
+                <button type="submit" class="btn btn-success" name="formSubmit">Отправить</button>
+            </form>
+        </div>
+        <div class="col-3"></div>
+    </div>
+</div>
