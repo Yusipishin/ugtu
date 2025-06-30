@@ -1,4 +1,25 @@
 {% load staticfiles %}
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+<script>
+    $(document).ready(function() {
+            $("#apply-form").on("submit", function(event) {
+                let captcha = grecaptcha.getResponse();
+                console.log(grecaptcha)
+                console.log(captcha)
+            
+                if (!captcha.length) {
+                    event.preventDefault();
+                    $('#recaptchaError').text('* Вы не прошли проверку капчей');
+                } else {
+                    $('#recaptchaError').text('');
+                    formSubmit.innerHTML = 'Идёт загрузка файлов, ожидайте...'; 
+                    formSubmit.disabled = true;
+                }
+       })
+    })
+</script>
+
 <script>
     function validateFile() {
         const allowedExtensions = ['pdf', 'jpg', 'jpeg'],
@@ -76,8 +97,7 @@
                 <p><a href="{% static 'docs/soglasie_na_peredachu_pdn_tretemu_licu_cropped2.pdf' %}" download>Согласие на
                     передачу информации на ЕПГУ</a></p>
             </div>{% endcomment %}
-            <form method="post" id="apply-form" enctype="multipart/form-data"
-                  onsubmit="formSubmit.innerHTML = 'Идёт загрузка файлов, ожидайте...'; formSubmit.disabled = true; return true;">
+            <form method="post" id="apply-form" enctype="multipart/form-data" onsubmit="return true">
                 {% csrf_token %}
                 <div class="mb-4">
                     <label for="exampleInputEmail1" class="form-label"><strong>ФИО<span
@@ -183,7 +203,8 @@
                     <small id="otherHelp" class="form-text text-muted">Вы можете выбрать несколько файлов.<br>
                         Разрешённые к загрузке файлы — <span class="text-danger">.pdf, .jpg, .jpeg</span></small>
                 </div>
-                
+                <div class="g-recaptcha" data-sitekey="6LcFuHIrAAAAAIX-2mMZzV8u51FQJjnsV2T3SZnf"></div>
+                <div class="danger" id="recaptchaError"></div>
                 <button type="submit" class="btn btn-success" name="formSubmit">Отправить</button>
             </form>
         </div>
