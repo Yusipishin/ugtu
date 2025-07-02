@@ -1,6 +1,7 @@
 import datetime
 import json
-import urllib
+import urllib.request
+import urllib.parse
 import re
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
@@ -84,6 +85,26 @@ def send_main_form(request):
 
 def apply_form(request):
     if request.method == 'POST':
+        recaptcha_token = request.POST.get('g-recaptcha-response')
+
+        if not recaptcha_token:
+            return render(request, 'apply.html', {'recaptcha_error': 'Капча не пройдена. Попробуйте ещё раз.'})
+
+        url = 'https://www.google.com/recaptcha/api/siteverify'
+        params = urllib.parse.urlencode({
+            'secret': settings.RECAPTCHA_SECRET_KEY,
+            'response': recaptcha_token
+        }).encode('utf-8')
+
+        print(params)
+
+        with urllib.request.urlopen(url, data=params) as response:
+            result = json.loads(response.read().decode())
+
+        print(result)
+        if not result.get('success'):
+            return render(request, 'apply.html', {'recaptcha_error': 'Капча не пройдена. Попробуйте ещё раз.'})
+
         fio = request.POST.get('fio', "")
         phone = request.POST.get('phone', "")
         email = request.POST.get('email', "")

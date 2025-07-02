@@ -103,6 +103,7 @@ STATICFILES_DIRS = (
 
 SECRET_KEY = '3&kj5#$qa5%3%py0s+_kb_ew%n(*(lanx7x4^9p()ufdk#w5^8'
 ALLOWED_HOSTS = ['*']
+RECAPTCHA_SECRET_KEY = '6LcFuHIrAAAAAIX-2mMZzV8u51FQJjnsV2T3SZnf'
 
 try:
     from .local_settings import *
